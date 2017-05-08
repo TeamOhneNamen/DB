@@ -18,7 +18,7 @@ foreign key (Fakultätsname) references Fakultät);
 create table Mitarbeiter
 (PersonalID			varchar(10),
 Departmentname		varchar(10),
-Name				      varchar(100000000000),
+Name				      varchar(10),
 primary key (PersonalID),
 foreign key (Departmentname) references Department);
 
