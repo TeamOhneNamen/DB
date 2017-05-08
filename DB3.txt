@@ -56,7 +56,7 @@ create table Uebung
 (Vorlesungsname		varchar(10),
 PersonalID				varchar(10),
 primary key (Vorlesungsname),
-foreign key (PersonalID) references Mitarbeiter);
+foreign key (PersonalID) references Wissenschaftlicher_Mitarbeiter);
 
 create table Verwaltungspersonal
 (PersonalID			varchar(10),
