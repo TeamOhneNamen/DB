@@ -4,17 +4,16 @@ Enddatum			date,
 Beginndatum			date,
 primary key (Semesterbezeichnung));
 
-create table Fakult‰t
-(Fakult‰tsname			varchar(10),
-PersonalID				varchar(10),
-primary key (Fakult‰tsname));
+create table Fakult√§t
+(Fakult√§tsname			varchar(10),
+primary key (Fakult√§tsname));
 
 create table Department
 (Departmentname		varchar(10),
-Fakult‰tsname		varchar(10),
+Fakult√§tsname		varchar(10),
 AnzahlStudis		number,
 primary key (Departmentname),
-foreign key (Fakult‰tsname) references Fakult‰t);
+foreign key (Fakult√§tsname) references Fakult√§t);
 
 create table Mitarbeiter
 (PersonalID			varchar(10),
@@ -25,7 +24,7 @@ foreign key (Departmentname) references Department);
 
 create table Dozent
 (PersonalID			varchar(10),
-DozK¸rzel				varchar(10),
+DozK√ºrzel				varchar(10),
 Departmentname		varchar(10),
 foreign key (PersonalID) references Mitarbeiter,
 primary key (PersonalID),
@@ -33,10 +32,10 @@ foreign key (Departmentname) references Department);
 
 create table Dekan
 (PersonalID	     varchar(10),
-Fakult‰tsname   varchar(10),
+Fakult√§tsname   varchar(10),
 
 PRIMARY KEY (PersonalID),
-FOREIGN KEY (Fakult‰tsname) REFERENCES Fakult‰t,
+FOREIGN KEY (Fakult√§tsname) REFERENCES Fakult√§t,
 FOREIGN KEY (PersonalID) REFERENCES Dozent);
 
 
@@ -82,12 +81,12 @@ create table Klausur
 Dauer				varchar(10),
 Raum				varchar(4),
 Klausurdatum  			date,
-Klausurschl¸ssel			varchar(10),
+Klausurschl√ºssel			varchar(10),
 Vorlesungsname			varchar(10),
 Semesterbezeichnung	varchar(7), --check (Semesterbezeichnung (SS or WS) + (varchar(2) or (varchar(2) + '/' + varchar(2))),
 MatrNr				varchar(7),
 Punkte				number(2) check (Punkte between 0 and 15),
-primary key (Klausurschl¸ssel),
+primary key (Klausurschl√ºssel),
 foreign key (Vorlesungsname) references Vorlesung, 
 foreign key (MatrNr) references Student,
 foreign key (Semesterbezeichnung) references Semester);
