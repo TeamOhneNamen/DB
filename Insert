@@ -22,3 +22,21 @@ INSERT INTO Dozent VALUES ('01','BK', 'AI');
 
 INSERT INTO Vorlesung VALUES ('01','PM1');
 INSERT INTO Vorlesung VALUES ('01','PM2');
+
+INSERT INTO Student VALUES ('1234567','TI', 'Mustermann');
+INSERT INTO Dozent VALUES ('03', 'GER', 'AI');
+INSERT INTO Vorlesung VALUES ('DB','03');
+INSERT INTO Klausur VALUES ('0800','0930', '01.01.1970','00001','DB','1234567','16');
+
+drop table Dozent CASCADE CONSTRAINTS;
+drop table Fakultät CASCADE CONSTRAINTS;
+drop table Semester CASCADE CONSTRAINTS;
+drop table Studiengang CASCADE CONSTRAINTS;
+drop table Uebung CASCADE CONSTRAINTS;
+drop table Verwaltungspersonal CASCADE CONSTRAINTS;
+drop table Student CASCADE CONSTRAINTS;
+drop table Wissenschaftlicher_Mitarbeiter CASCADE CONSTRAINTS;
+drop table Department CASCADE CONSTRAINTS;
+drop table Klausur CASCADE CONSTRAINTS;
+drop table Vorlesung CASCADE CONSTRAINTS;
+drop table Mitarbeiter CASCADE CONSTRAINTS;
