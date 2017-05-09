@@ -48,7 +48,7 @@ drop table Studiengang CASCADE CONSTRAINTS;
 drop table Uebung CASCADE CONSTRAINTS;
 drop table Verwaltungspersonal CASCADE CONSTRAINTS;
 drop table Student CASCADE CONSTRAINTS;
-drop table Wissenschaftlicher_Mitarbeiter CASCADE CONSTRAINTS;
+drop table Wis_Mitarbeiter CASCADE CONSTRAINTS;
 drop table Department CASCADE CONSTRAINTS;
 drop table Klausur CASCADE CONSTRAINTS;
 drop table Vorlesung CASCADE CONSTRAINTS;
