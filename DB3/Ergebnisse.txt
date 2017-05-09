@@ -1,0 +1,97 @@
+-FAKULTÄT-
+
+FAKULTÄTSN PERSONALID
+---------- ----------
+MI         0         
+BW         0         
+
+
+-DEPARTMENT-
+
+DEPARTMENT FAKULTÄTSN ANZAHLSTUDIS
+---------- ---------- ------------
+AI         MI                  200
+TI         MI                  200
+BL         BW                  150
+AL         BW                  150
+
+
+-Mitarbeiter-
+
+PERSONALID DEPARTMENT NAME                
+---------- ---------- --------------------
+01         AI         BERND KAHLBRANT     
+02         AI         GERT ÖLKER          
+03         AI         GERKEN              
+04         TI         KLAUS KLEBER        
+05         BL         GUNDULA GAUSE       
+
+
+-Dozent-
+
+PERSONALID DOZKÜRZEL 
+---------- ----------
+01         BK        
+03         GER       
+
+
+-Wis_Mitarbeiter-
+
+PERSONALID FACHGEBIET
+---------- ----------
+02         GÖ        
+
+
+-Verwaltungspersonal-
+
+PERSONALID KOSTENSTEL
+---------- ----------
+04         KK        
+05         GG        
+
+
+-Studenten-
+
+MATRNR  DEPARTMENT NAME                
+------- ---------- --------------------
+1234567 TI         Mustermann          
+2319195 AI         Schomacker          
+2319845 AI         Trendelenburg       
+
+
+-Semester-
+
+SEMESTE ENDDATUM BEGINNDA
+------- -------- --------
+WISE    01.01.70 01.08.70
+SOSE    01.07.70 01.12.70
+
+
+-Studiengang-
+
+Keine Zeilen gewählt
+
+
+-Vorlesung-
+
+PERSONALID VORLESUNGS
+---------- ----------
+01         PM1       
+01         PM2       
+03         DB        
+03         LB        
+03         MG        
+
+
+-Uebung-
+
+Keine Zeilen gewählt
+
+
+-Klausur-
+
+BEGIN DAUER      RAUM KLAUSURD KLAUSURSCH VORLESUNGS SEMESTE MATRNR      PUNKTE
+----- ---------- ---- -------- ---------- ---------- ------- ------- ----------
+0800  120        1085 01.01.70 00001      DB         SOSE    1234567         15
+0800  120        1001 01.07.70 00002      MG         WISE    2319195          0
+0800  120        1001 01.07.70 00003      MG         WISE    2319845          4
