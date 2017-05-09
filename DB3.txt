@@ -1,12 +1,12 @@
 create table Semester
-(Semesterbezeichnung	varchar(7), --check (Semesterbezeichnung (('WS'[0-9][0-9]'/'[0-9][0-9]) + ('SS'[0-9][0-9]) ),
+(Semesterbezeichnung	varchar(7), 
 Enddatum			date, 
 Beginndatum			date,
 primary key (Semesterbezeichnung));
 
 create table Fakultät
 (Fakultätsname			varchar(10),
-PersonalID            		varchar(10),
+PersonalID          varchar(10),
 primary key (Fakultätsname));
 
 create table Department
@@ -26,15 +26,13 @@ foreign key (Departmentname) references Department);
 create table Dozent
 (PersonalID			varchar(10),
 DozKürzel				varchar(10),
-Departmentname		varchar(10),
 foreign key (PersonalID) references Mitarbeiter,
-primary key (PersonalID),
-foreign key (Departmentname) references Department);
+primary key (PersonalID));
 
 create table Student
 (MatrNr				varchar(7),
 Departmentname		varchar(10),
-Name				varchar(10),
+Name				varchar(20),
 primary key (MatrNr),
 foreign key (Departmentname) references Department);
 
@@ -57,7 +55,7 @@ Vorlesungsname			varchar(10),
 primary key (Vorlesungsname),
 foreign key (PersonalID) references Dozent);
 
-create table Wissenschaftlicher_Mitarbeiter
+create table Wis_Mitarbeiter
 (PersonalID			varchar(10),
 Fachgebiet				varchar(10),
 primary key (PersonalID),
@@ -67,7 +65,7 @@ create table Uebung
 (Vorlesungsname		varchar(10),
 PersonalID				varchar(10),
 primary key (Vorlesungsname),
-foreign key (PersonalID) references Wissenschaftlicher_Mitarbeiter);
+foreign key (PersonalID) references Wis_Mitarbeiter);
 
 create table Klausur
 (Beginnzeit				varchar(5),
@@ -76,13 +74,11 @@ Raum				varchar(4),
 Klausurdatum  			date,
 Klausurschlüssel			varchar(10),
 Vorlesungsname			varchar(10),
-Semesterbezeichnung	varchar(7), --check (Semesterbezeichnung (SS or WS) + (varchar(2) or (varchar(2) + '/' + varchar(2))),
+Semesterbezeichnung	varchar(7),
 MatrNr				varchar(7),
 Punkte				number(2) check (Punkte between 0 and 15),
 primary key (Klausurschlüssel),
 foreign key (Vorlesungsname) references Vorlesung, 
 foreign key (MatrNr) references Student,
 foreign key (Semesterbezeichnung) references Semester);
-
-ALTER TABLE Fakultät ADD CONSTRAINT dekan FOREIGN KEY (PersonalID) REFERENCES Dozent;
 
