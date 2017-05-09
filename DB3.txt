@@ -6,6 +6,7 @@ primary key (Semesterbezeichnung));
 
 create table Fakultät
 (Fakultätsname			varchar(10),
+PersonalID            		varchar(10),
 primary key (Fakultätsname));
 
 create table Department
@@ -30,15 +31,6 @@ foreign key (PersonalID) references Mitarbeiter,
 primary key (PersonalID),
 foreign key (Departmentname) references Department);
 
-create table Dekan
-(PersonalID	     varchar(10),
-Fakultätsname   varchar(10),
-
-PRIMARY KEY (PersonalID),
-FOREIGN KEY (Fakultätsname) REFERENCES Fakultät,
-FOREIGN KEY (PersonalID) REFERENCES Dozent);
-
-
 create table Student
 (MatrNr				varchar(7),
 Departmentname		varchar(10),
@@ -52,11 +44,6 @@ Studiengangsbezeichnung	varchar(10),
 primary key (Studiengangsbezeichnung),
 foreign key (Departmentname) references Department);
 
-create table Uebung
-(Vorlesungsname		varchar(10),
-PersonalID				varchar(10),
-primary key (Vorlesungsname),
-foreign key (PersonalID) references Wissenschaftlicher_Mitarbeiter);
 
 create table Verwaltungspersonal
 (PersonalID			varchar(10),
@@ -76,6 +63,12 @@ Fachgebiet				varchar(10),
 primary key (PersonalID),
 foreign key (PersonalID) references Mitarbeiter);
 
+create table Uebung
+(Vorlesungsname		varchar(10),
+PersonalID				varchar(10),
+primary key (Vorlesungsname),
+foreign key (PersonalID) references Wissenschaftlicher_Mitarbeiter);
+
 create table Klausur
 (Beginnzeit				varchar(5),
 Dauer				varchar(10),
@@ -90,3 +83,6 @@ primary key (Klausurschlüssel),
 foreign key (Vorlesungsname) references Vorlesung, 
 foreign key (MatrNr) references Student,
 foreign key (Semesterbezeichnung) references Semester);
+
+ALTER TABLE Fakultät ADD CONSTRAINT dekan FOREIGN KEY (PersonalID) REFERENCES Dozent;
+
