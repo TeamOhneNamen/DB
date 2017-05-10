@@ -3,7 +3,7 @@
 FAKULTÄTSN PERSONALID
 ---------- ----------
 MI         0         
-BW         0         
+BW         0              
 
 
 -DEPARTMENT-
@@ -24,7 +24,7 @@ PERSONALID DEPARTMENT NAME
 02         AI         GERT ÖLKER          
 03         AI         GERKEN              
 04         TI         KLAUS KLEBER        
-05         BL         GUNDULA GAUSE       
+05         BL         GUNDULA GAUSE
 
 
 -Dozent-
@@ -42,6 +42,7 @@ PERSONALID FACHGEBIET
 02         GÖ        
 
 
+
 -Verwaltungspersonal-
 
 PERSONALID KOSTENSTEL
@@ -50,13 +51,15 @@ PERSONALID KOSTENSTEL
 05         GG        
 
 
+
 -Studenten-
 
-MATRNR  DEPARTMENT NAME                
-------- ---------- --------------------
-1234567 TI         Mustermann          
-2319195 AI         Schomacker          
-2319845 AI         Trendelenburg       
+MATRNR  DEPARTMENT STUDIENGAN NAME                
+------- ---------- ---------- --------------------
+1234567 TI         BTI1       Mustermann          
+2319195 AI         BAI1       Schomacker          
+2319845 AI         BAI1       Trendelenburg       
+
 
 
 -Semester-
@@ -67,31 +70,61 @@ WISE    01.01.70 01.08.70
 SOSE    01.07.70 01.12.70
 
 
+
 -Studiengang-
 
-Keine Zeilen gewählt
+DEPARTMENT STUDIENGAN
+---------- ----------
+TI         BTI1      
+AI         BAI1      
+AI         BAI2      
+
 
 
 -Vorlesung-
 
-PERSONALID VORLESUNGS
----------- ----------
-01         PM1       
-01         PM2       
-03         DB        
-03         LB        
-03         MG        
+PERSONALID VORLESUNGS STUDIENGAN
+---------- ---------- ----------
+01         PM1        BAI1      
+01         PM2        BAI2      
+03         DB         BAI2      
+03         LB         BAI2      
+03         MG         BAI1      
+
 
 
 -Uebung-
 
-Keine Zeilen gewählt
+VORLESUNGS PERSONALID
+---------- ----------
+PM1        02        
+PM2        02        
+
 
 
 -Klausur-
 
-BEGIN DAUER      RAUM KLAUSURD KLAUSURSCH VORLESUNGS SEMESTE MATRNR      PUNKTE
------ ---------- ---- -------- ---------- ---------- ------- ------- ----------
-0800  120        1085 01.01.70 00001      DB         SOSE    1234567         15
-0800  120        1001 01.07.70 00002      MG         WISE    2319195          0
-0800  120        1001 01.07.70 00003      MG         WISE    2319845          4
+BEGIN DAUER      RAUM KLAUSURD VORLESUNGS SEMESTERBE KLAUSURSCHLÜSSEL    
+----- ---------- ---- -------- ---------- ---------- --------------------
+0800  120        1085 01.01.70 PM1        SOSE       PM1SOSE             
+0800  120        1001 01.07.70 MG         SOSE       MGSOSE              
+0800  120        1001 01.07.70 MG         WISE       MGWISE              
+
+
+-Schreibt-
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+
+
+-Besucht-
+
+MATRNR  VORLESUNGS
+------- ----------
+2319845 PM2       
+2319845 DB        
+2319845 LB        
+1234567 PM1       
