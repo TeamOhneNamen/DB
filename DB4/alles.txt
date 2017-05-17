@@ -58,6 +58,7 @@ Studiengangsbezeichnung		varchar(10),
 Name				varchar(20),
 Vorname				varchar(20),
 MatrDatum			date,
+Wohnort				Varchar(20),
 primary key (MatrNr),
 foreign key (Studiengangsbezeichnung) references Studiengang,
 foreign key (Departmentname) references Department);
@@ -120,7 +121,7 @@ INSERT INTO FAKULTÄT VALUES ('BW', 0);
 
 INSERT INTO DEPARTMENT VALUES ('AI', 'MI', 200);
 INSERT INTO DEPARTMENT VALUES ('TI', 'MI', 200);
-INSERT INTO DEPARTMENT VALUES ('WI', 'MI', 150);
+INSERT INTO DEPARTMENT VALUES ('WI', 'BW', 150);
 INSERT INTO DEPARTMENT VALUES ('BL', 'BW', 150);
 INSERT INTO DEPARTMENT VALUES ('AL', 'BW', 150);
 
@@ -152,10 +153,10 @@ INSERT INTO Vorlesung VALUES ('03','DB', 'BAI2');
 INSERT INTO Vorlesung VALUES ('03','LB', 'BAI2');
 INSERT INTO Vorlesung VALUES ('03','MG', 'BAI1');
 
-INSERT INTO Student VALUES ('1234567','TI', 'BTI1', 'Mustermann', 'Max', 01.01.1970);
-INSERT INTO Student VALUES ('2319195','AI', 'BAI1', 'Schomacker', 'Thorben', 01.01.1970);
-INSERT INTO Student VALUES ('2319845','AI', 'BAI1', 'Trendelenburg', 'Ferdinand', 01.01.1970);
-INSERT INTO Student VALUES ('2319846','WI', 'BWI1', 'Gerken', 'Gerken', 01.01.1970);
+INSERT INTO Student VALUES ('1234567','TI', 'BTI1', 'Mustermann', 'Max', '01.01.1970', 'Musterhausen');
+INSERT INTO Student VALUES ('2319195','AI', 'BAI1', 'Schomacker', 'Thorben', '01.01.1970', 'Hamburg');
+INSERT INTO Student VALUES ('2319845','AI', 'BAI1', 'Trendelenburg', 'Ferdinand', '01.01.1970', 'Berlin');
+INSERT INTO Student VALUES ('2319846','WI', 'BWI1', 'Gerken', 'Gerken', '01.01.1970', 'Gerkenburg');
 
 
 INSERT INTO BESUCHT VALUES ('2319845', 'PM2');
@@ -171,10 +172,12 @@ INSERT INTO Uebung VALUES ('PM2', '02');
 INSERT INTO Klausur VALUES ('0800','120', '1085', '01.01.1970', 'PM1', 'SOSE', 'PM1SOSE');
 INSERT INTO Klausur VALUES ('0800','120', '1001', '01.07.1970', 'MG', 'SOSE', 'MGSOSE');
 INSERT INTO Klausur VALUES ('0800','120', '1001', '01.07.1970', 'MG', 'WISE', 'MGWISE');
+INSERT INTO Klausur VALUES ('0800','120', '1001', '01.07.1970', 'DB', 'WISE', 'DBWISE');
 
 INSERT INTO SCHREIBT VALUES('1234567', 'PM1SOSE', 13);
 INSERT INTO SCHREIBT VALUES('2319845', 'MGSOSE', 0);
 INSERT INTO SCHREIBT VALUES('2319845', 'MGWISE', 13);
+INSERT INTO SCHREIBT VALUES('1234567', 'DBWISE', 15);
 
 SELECT * FROM FAKULTÄT;
 SELECT * FROM DEPARTMENT;

@@ -1,2 +1,57 @@
-SELECT COUNT(MatrNr) FROM Student,
-SELECT * FROM Student WHERE Studiengangsbezeichnung='AI',
+1. 
+SELECT COUNT(MatrNr) FROM Student;
+
+2. 
+SELECT NAME, VORNAME FROM Student where STUDIENGANGSBEZEICHNUNG='BAI1' ORDER BY NAME ASC;
+
+3. 
+SELECT SUBSTR(Vorname, 1, 1) As NewVorname, Name from student where STUDIENGANGSBEZEICHNUNG='BAI1';
+
+4. 
+SELECT NAME FROM Student where STUDIENGANGSBEZEICHNUNG='BWI1';
+
+5. 
+SELECT MatrDatum, Name FROM Student WHERE Wohnort LIKE '%burg%';
+
+6.
+SELECT Student.MatrDatum, Student.Name, Student.Departmentname, Department.Fakultätsname 
+FROM Student, Department
+WHERE Student.Departmentname=Department.Departmentname;
+
+7.
+SELECT name 
+FROM STUDENT, SCHREIBT, KLAUSUR
+WHERE KLAUSUR.Vorlesungsname='DB' AND schreibt.MatrNr=Student.MatrNr AND Schreibt.Punkte=15; 
+
+8.
+SELECT AVG(Punkte) FROM Schreibt WHERE Klausurschlüssel = 'DBWISE';
+
+Select Name
+From Student, Schreibt
+WHERE Schreibt.Punkte > (SELECT AVG(Punkte) FROM Schreibt WHERE Klausurschlüssel = 'DBWISE') 
+    AND Klausurschlüssel = 'DBWISE' 
+    AND Schreibt.MatrNr=Student.MatrNr;
+
+9.
+SELECT AVG(Punkte) FROM Schreibt;
+
+10.
+SELECT Name
+FROM STUDENT LEFT JOIN SCHREIBT ON STUDENT.MATRNR = SCHREIBT.MATRNR
+WHERE SCHREIBT.MATRNR IS NULL;
+
+11.
+SELECT KLAUSURSCHLÜSSEL, AVG(Punkte) 
+FROM Schreibt 
+GROUP BY Klausurschlüssel;
+
+12.
+
+SELECT Fakultät.PersonalID
+FROM Fakultät, STUDENT, DEPARTMENT
+WHERE Student.Departmentname = Department.Departmentname 
+    AND Department.FAKULTÄTSNAME = Fakultät.Fakultätsname
+    AND Student.NAME='Mustermann';
+
+13.
+132 m
