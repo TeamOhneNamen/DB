@@ -1,0 +1,2 @@
+SELECT COUNT(MatrNr) FROM Student,
+SELECT * FROM Student WHERE Studiengangsbezeichnung='AI',
