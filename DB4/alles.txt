@@ -13,6 +13,8 @@ drop table Mitarbeiter CASCADE CONSTRAINTS;
 drop table BESUCHT CASCADE CONSTRAINTS;
 drop table SCHREIBT CASCADE CONSTRAINTS;
 
+drop table KIRCHE CASCADE CONSTRAINTS;
+
 
 create table Semester
 (Semesterbezeichnung	varchar(7), 
@@ -115,6 +117,12 @@ Punkte				    	number(2) check (Punkte between 0 and 15),
 foreign key (Klausurschlüssel) references Klausur,
 foreign key (MatrNr) references Student);
 
+create table Kirche
+(Name				    	varchar(20),
+Hoehe					number(4),
+primary key (Name));
+
+
 
 INSERT INTO FAKULTÄT VALUES ('MI', 0);
 INSERT INTO FAKULTÄT VALUES ('BW', 0);
@@ -157,7 +165,7 @@ INSERT INTO Student VALUES ('1234567','TI', 'BTI1', 'Mustermann', 'Max', '01.01.
 INSERT INTO Student VALUES ('2319195','AI', 'BAI1', 'Schomacker', 'Thorben', '01.01.1970', 'Hamburg');
 INSERT INTO Student VALUES ('2319845','AI', 'BAI1', 'Trendelenburg', 'Ferdinand', '01.01.1970', 'Berlin');
 INSERT INTO Student VALUES ('2319846','WI', 'BWI1', 'Gerken', 'Gerken', '01.01.1970', 'Gerkenburg');
-
+INSERT INTO Student VALUES ('9876543','WI', 'BWI1', 'Sack', 'Fauler', '01.01.1970', 'Sackstadt');
 
 INSERT INTO BESUCHT VALUES ('2319845', 'PM2');
 INSERT INTO BESUCHT VALUES ('2319845', 'DB');
@@ -177,7 +185,21 @@ INSERT INTO Klausur VALUES ('0800','120', '1001', '01.07.1970', 'DB', 'WISE', 'D
 INSERT INTO SCHREIBT VALUES('1234567', 'PM1SOSE', 13);
 INSERT INTO SCHREIBT VALUES('2319845', 'MGSOSE', 0);
 INSERT INTO SCHREIBT VALUES('2319845', 'MGWISE', 13);
-INSERT INTO SCHREIBT VALUES('1234567', 'DBWISE', 15);
+
+INSERT INTO SCHREIBT VALUES('1234567', 'DBWISE', 5);
+INSERT INTO SCHREIBT VALUES('2319845', 'DBWISE', 15);
+INSERT INTO SCHREIBT VALUES('2319195', 'DBWISE', 15);
+INSERT INTO SCHREIBT VALUES('2319846', 'DBWISE', 13);
+
+
+UPDATE FAKULTÄT
+	SET PERSONALID = '03'
+    WHERE FAKULTÄTSNAME = 'MI';
+
+
+INSERT INTO KIRCHE VALUES('Michel', '132');
+
+
 
 SELECT * FROM FAKULTÄT;
 SELECT * FROM DEPARTMENT;
@@ -193,3 +215,4 @@ SELECT * FROM UEBUNG;
 SELECT * FROM KLAUSUR;
 SELECT * FROM SCHREIBT;
 SELECT * FROM BESUCHT;
+SELECT * FROM Kirche;
