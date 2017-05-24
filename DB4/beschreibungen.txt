@@ -1,0 +1,31 @@
+Nimm alle Vornamen und Namen aus der Tabelle STUNDENT und erstelle einen Substring aus Name biginnend ab Position 1 und 1 Char länge.
+
+4. 
+Nimm alle Namen aus der Tabelle STUDENT, bei denen Die Semesterbezeichnung gleich 'BWI1' ist.
+
+5. 
+Nimm alle Martikel-datum und Name aus der Tabelle Student, bei denen im Wohnort die Zeichenkette 'Burg' oder 'burg' vorkommt
+
+6. 
+Nimm alle Matrikel-daten, Namen, und Departmentnamen aus der Tabelle Student und Fakultätsnamen aus der Liste Department, bei dennen der Departmentname übereinstimmt
+
+7.
+Nimm alle namen aus der Liste Studenten, bei denen Der Vorlesungsname 'DB' lautet, und Die Matrikelnummer des Studenten, der die Klausur schreibt gleich der MAtrikelnummer des Studenten ist und bei denen Die Punkte 15 sind.
+
+8. 
+Nimm alle namen aus der Liste Student, dessen Punkte in der Klausur mit dem Klausurenschlüssel "DBWISE" aus der Tabelle schreibt größer ist, Als der Mittelwert aller geschriebenen Klausuren die den Klausurenschlüssel "DBWISE").
+
+9.
+Nimm den Durchschnitt von alles Einträgen der liste Schreibt
+
+10.
+Nimm alle Namen Der zusammengefügten Listen Student und Schreibt über den eintrag Matrikelnummer, in der die Matrikelnummer aus schreibt null ist.
+
+11. 
+
+
+12.
+
+
+13.
+Erstelle einen Substring von "Der Michel ist 132m hoch", angefangen beim Char 16 und dann 11 Chars lang.
