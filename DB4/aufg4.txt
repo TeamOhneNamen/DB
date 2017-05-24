@@ -1,0 +1,247 @@
+1. Wie viele Studierende gibt es? 
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt    
+
+
+SELECT COUNT(*) FROM Student;
+
+Zähle alle Zeilen in der Tabelle Student.
+
+  COUNT(*)
+----------
+         5
+
+2. Geben Sie die Namen (Nachname, Vorname) der Studierenden im Studiengang AI nach Name aufsteigend sortiert aus. 
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt    		 
+		 
+SELECT NAME, VORNAME FROM Student where STUDIENGANGSBEZEICHNUNG='BAI1' ORDER BY NAME ASC;		 
+
+Nimm alle Namen und Vornamen der Tabelle Student, bei denen STUDIENGANGSBEZEICHNUNG BAI1 ist und sortiere absteigend nach dem Namen.
+
+NAME                 VORNAME             
+-------------------- --------------------
+Schomacker           Thorben             
+Trendelenburg        Ferdinand           		 
+
+3. Ausgabe des 1. Buchstaben des Vornamens und der Name aller AI-Studierenden.
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt    		 
+
+SELECT SUBSTR(Vorname, 1, 1) As NewVorname, Name from student where STUDIENGANGSBEZEICHNUNG='BAI1';
+
+N NAME                
+- --------------------
+T Schomacker          
+F Trendelenburg   
+
+4. Die Namen der Studierenden im Studiengang mit der Bezeichnung Wirtschaftsinformatik.
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt  
+
+SELECT NAME FROM Student where STUDIENGANGSBEZEICHNUNG='BWI1';
+
+NAME                
+--------------------
+Gerken
+Sack
+
+
+
+5. Die Namen und das Immatrikulationsdatum derjenigen Studierenden ausgeben, in deren Wohnort es eine Burg gibt oder gab (wie z. B. in Hamburg).
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt  
+
+SELECT MatrDatum, Name FROM Student WHERE Wohnort LIKE '%burg%' OR Wohnort LIKE '%Burg%';
+
+MATRDATU NAME                
+-------- --------------------
+01.01.70 Schomacker          
+01.01.70 Gerken     
+
+         
+6. Die Namen sowie das Immatrikulationsdatum der Studierenden sowie die Bezeichnungen des Departments und der Fakultät ausgeben, wo sie immatrikuliert sind. 
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt 
+
+DEPARTMENT STUDIENGAN
+---------- ----------
+TI         BTI1      
+AI         BAI1      
+AI         BAI2      
+WI         BWI1      
+
+SELECT Student.MatrDatum, Student.Name, Student.Departmentname, Department.Fakultätsname 
+FROM Student, Department
+WHERE Student.Departmentname=Department.Departmentname;
+
+MATRDATU NAME                 DEPARTMENT FAKULTÄTSN
+-------- -------------------- ---------- ----------
+01.01.70 Trendelenburg        AI         MI        
+01.01.70 Schomacker           AI         MI        
+01.01.70 Mustermann           TI         MI        
+01.01.70 Sack                 WI         BW        
+01.01.70 Gerken               WI         BW        
+
+7. Die Namen der Studierenden, die in einer Klausur des Faches mit der Bezeichnung Datenbanken 15 Punkte erreicht hatten. 
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+
+BEGIN DAUER      RAUM KLAUSURD VORLESUNGS SEMESTERBE KLAUSURSCHLÜSSEL    
+----- ---------- ---- -------- ---------- ---------- --------------------
+0800  120        1085 01.01.70 PM1        SOSE       PM1SOSE             
+0800  120        1001 01.07.70 MG         SOSE       MGSOSE              
+0800  120        1001 01.07.70 MG         WISE       MGWISE              
+0800  120        1001 01.07.70 DB         WISE       DBWISE              
+
+SELECT name 
+FROM STUDENT, SCHREIBT, KLAUSUR
+WHERE KLAUSUR.Vorlesungsname='DB' AND schreibt.MatrNr=Student.MatrNr AND Schreibt.Punkte=15; 
+
+
+NAME                
+--------------------
+Trendelenburg
+Schomacker
+
+
+8. Die Namen der Studierenden, die im Fach Datenbanken besser als der Durchschnitt waren. 
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+
+Select Name
+From Student, Schreibt
+WHERE Schreibt.Punkte > (SELECT AVG(Punkte) FROM Schreibt WHERE Klausurschlüssel = 'DBWISE') 
+    AND Klausurschlüssel = 'DBWISE' 
+    AND Schreibt.MatrNr=Student.MatrNr; 
+
+
+NAME                
+--------------------
+Trendelenburg
+Schomacker
+Gerken
+
+9. Wie hoch ist die Durchschnittspunktzahl der Klausuren in jedem Fach? 
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+
+SELECT AVG(Punkte) FROM Schreibt;
+
+AVG(PUNKTE)
+-----------
+10,5714286 
+
+10. Welche Studierenden haben bisher an keiner Klausur ihres Studiengangs teilgenommen? 
+
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+
+SELECT Name
+FROM STUDENT LEFT JOIN SCHREIBT ON STUDENT.MATRNR = SCHREIBT.MATRNR
+WHERE SCHREIBT.MATRNR IS NULL;
+
+NAME                
+--------------------
+Sack
+
+11. Wo ist es leichter oder wer ist besser?? Lassen Sie sich die Durchschnittspunktzahl in den einzelnen Studiengängen ausgeben.  
+
+
+12. Wie heißt der Dekan der Fakultät, in der z. B. der Student mit dem Namen Felix Nerd studiert? 
+13. Wie hoch ist der Michel? 
+ 
+     
