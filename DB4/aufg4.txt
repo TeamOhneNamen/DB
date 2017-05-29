@@ -1,4 +1,6 @@
-﻿1. Wie viele Studierende gibt es? 
+1. Wie viele Studierende gibt es? 
+
+Student:
 
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
@@ -18,6 +20,8 @@ Zähle alle Zeilen in der Tabelle Student.
          5
 
 2. Geben Sie die Namen (Nachname, Vorname) der Studierenden im Studiengang AI nach Name aufsteigend sortiert aus. 
+
+Student:
 
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
@@ -39,6 +43,8 @@ Trendelenburg        Ferdinand
 
 3. Ausgabe des 1. Buchstaben des Vornamens und der Name aller AI-Studierenden.
 
+Student:
+
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
 1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
@@ -58,6 +64,8 @@ T Schomacker
 F Trendelenburg   
 
 4. Die Namen der Studierenden im Studiengang mit der Bezeichnung Wirtschaftsinformatik.
+
+Student:
 
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
@@ -79,6 +87,8 @@ Sack
 
 
 5. Die Namen und das Immatrikulationsdatum derjenigen Studierenden ausgeben, in deren Wohnort es eine Burg gibt oder gab (wie z. B. in Hamburg).
+
+Student:
 
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
@@ -102,6 +112,8 @@ MATRDATU NAME
 6. Die Namen sowie das Immatrikulationsdatum der Studierenden sowie die Bezeichnungen des Departments und 
 der Fakultät ausgeben, wo sie immatrikuliert sind. 
 
+Student:
+
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
 1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
@@ -109,6 +121,8 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
 2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
 9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt 
+
+Department:
 
 DEPARTMENT STUDIENGAN
 ---------- ----------
@@ -134,6 +148,8 @@ MATRDATU NAME                 DEPARTMENT FAKULTÄTSN
 
 7. Die Namen der Studierenden, die in einer Klausur des Faches mit der Bezeichnung Datenbanken 15 Punkte erreicht hatten. 
 
+Student:
+
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
 1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
@@ -141,6 +157,8 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
 2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
 9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+
+Schreibt:
 
 MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 ------- -------------------- ----------
@@ -151,6 +169,8 @@ MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 2319845 DBWISE                       15
 2319195 DBWISE                       15
 2319846 DBWISE                       13
+
+Klausur:
 
 BEGIN DAUER      RAUM KLAUSURD VORLESUNGS SEMESTERBE KLAUSURSCHLÜSSEL    
 ----- ---------- ---- -------- ---------- ---------- --------------------
@@ -174,6 +194,8 @@ Schomacker
 
 8. Die Namen der Studierenden, die im Fach Datenbanken besser als der Durchschnitt waren. 
 
+Student:
+
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
 1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
@@ -182,6 +204,7 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
 9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
 
+Schreibt:
 
 MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 ------- -------------------- ----------
@@ -213,6 +236,8 @@ Gerken
 
 9. Wie hoch ist die Durchschnittspunktzahl der Klausuren in jedem Fach? 
 
+Schreibt:
+
 MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 ------- -------------------- ----------
 1234567 PM1SOSE                      13
@@ -233,6 +258,7 @@ AVG(PUNKTE)
 
 10. Welche Studierenden haben bisher an keiner Klausur ihres Studiengangs teilgenommen? 
 
+Schreibt:
 
 MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 ------- -------------------- ----------
@@ -243,6 +269,8 @@ MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 2319845 DBWISE                       15
 2319195 DBWISE                       15
 2319846 DBWISE                       13
+
+Student:
 
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
@@ -265,6 +293,8 @@ Sack
 
 11. Wo ist es leichter oder wer ist besser?? Lassen Sie sich die Durchschnittspunktzahl in den einzelnen Studiengängen ausgeben.  
 
+Student:
+
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
 1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
@@ -272,6 +302,8 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
 2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
 9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt  
+
+Schreibt:
 
 MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 ------- -------------------- ----------
@@ -288,7 +320,7 @@ FROM Schreibt, STUDENT
 WHERE Schreibt.Matrnr = Student.Matrnr 
 GROUP BY Student.Studiengangsbezeichnung;
 
-Nimm 
+Nimm die Punkte aller geschriebenen klausuren und gruppiere sie nach der Studiengangsbezeichnung der Studenten.
 
 STUDIENGAN AVG(SCHREIBT.PUNKTE)
 ---------- --------------------
@@ -299,21 +331,34 @@ BWI1                         13
 
 12. Wie heißt der Dekan der Fakultät, in der z. B. der Student mit dem Namen Felix Nerd studiert? 
 
+Student:
 
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt  
 
+Mitarbeiter:
 
-MATRNR  DEPARTMENT STUDIENGAN NAME                
-------- ---------- ---------- --------------------
-1234567 TI         BTI1       Mustermann          
-2319195 AI         BAI1       Schomacker          
-2319845 AI         BAI1       Trendelenburg     
+PERSONALID DEPARTMENT NAME                
+---------- ---------- --------------------
+01         AI         BERND KAHLBRANT     
+02         AI         GERT ÖLKER          
+03         AI         GERKEN              
+04         TI         KLAUS KLEBER        
+05         BL         GUNDULA GAUSE   
 
+Fakultät:
 
 FAKULTÄTSN PERSONALID
 ---------- ----------
-MI         3         
-BW         2         
+MI         03         
+BW         02         
 
+Department:
 
 DEPARTMENT FAKULTÄTSN ANZAHLSTUDIS
 ---------- ---------- ------------
@@ -331,8 +376,7 @@ WHERE Student.Departmentname = Department.Departmentname
 AND Student.NAME='Mustermann'
 AND Mitarbeiter.PERSONALID = FAKULTÄT.PERSONALID;
 
-
-
+Nimm den Namen des Mitarbeiters, der in der Fakultät, in der das Department des Studenten Mustermann liegt, der dort als Dekan eingetragen ist.
 
 
 NAME                
@@ -342,8 +386,8 @@ GERKEN
 
 13. Wie hoch ist der Michel? 
 
-SELECT S
+SELECT SUBSTR('Der Michel ist 132m hoch',16,4 ) from dual;
 
 Erstelle einen Substring von "Der Michel ist 132m hoch", 
-angefangen beim Char 16 und dann 11 Chars lang.
+angefangen beim Char 16 und dann 4 Chars lang.
      
