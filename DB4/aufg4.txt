@@ -288,6 +288,8 @@ FROM Schreibt, STUDENT
 WHERE Schreibt.Matrnr = Student.Matrnr 
 GROUP BY Student.Studiengangsbezeichnung;
 
+Nimm 
+
 STUDIENGAN AVG(SCHREIBT.PUNKTE)
 ---------- --------------------
 BTI1                          9
@@ -322,16 +324,25 @@ AL         BW                  150
 
 
 
-SELECT Fakultät.PersonalID
-FROM Fakultät, STUDENT, DEPARTMENT
+SELECT Mitarbeiter.Name
+FROM Fakultät, STUDENT, DEPARTMENT, MITARBEITER
 WHERE Student.Departmentname = Department.Departmentname 
     AND Department.FAKULTÄTSNAME = Fakultät.Fakultätsname
-    AND Student.NAME='Mustermann';
+AND Student.NAME='Mustermann'
+AND Mitarbeiter.PERSONALID = FAKULTÄT.PERSONALID;
+
+
+
+
+
+NAME                
+--------------------
+GERKEN
 
 
 13. Wie hoch ist der Michel? 
 
-SELECT
+SELECT S
 
 Erstelle einen Substring von "Der Michel ist 132m hoch", 
 angefangen beim Char 16 und dann 11 Chars lang.
