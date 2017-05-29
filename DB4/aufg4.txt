@@ -265,6 +265,14 @@ Sack
 
 11. Wo ist es leichter oder wer ist besser?? Lassen Sie sich die Durchschnittspunktzahl in den einzelnen Studiengängen ausgeben.  
 
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt  
+
 MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 ------- -------------------- ----------
 1234567 PM1SOSE                      13
