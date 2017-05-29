@@ -265,6 +265,26 @@ Sack
 
 11. Wo ist es leichter oder wer ist besser?? Lassen Sie sich die Durchschnittspunktzahl in den einzelnen Studiengängen ausgeben.  
 
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+
+SELECT Student.Studiengangsbezeichnung, AVG(Schreibt.Punkte) 
+FROM Schreibt, STUDENT 
+WHERE Schreibt.Matrnr = Student.Matrnr 
+GROUP BY Student.Studiengangsbezeichnung;
+
+STUDIENGAN AVG(SCHREIBT.PUNKTE)
+---------- --------------------
+BTI1                          9
+BAI1       		  10,75               
+BWI1                         13
 
 
 12. Wie heißt der Dekan der Fakultät, in der z. B. der Student mit dem Namen Felix Nerd studiert? 
