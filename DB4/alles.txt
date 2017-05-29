@@ -13,7 +13,6 @@ drop table Mitarbeiter CASCADE CONSTRAINTS;
 drop table BESUCHT CASCADE CONSTRAINTS;
 drop table SCHREIBT CASCADE CONSTRAINTS;
 
-drop table KIRCHE CASCADE CONSTRAINTS;
 
 
 create table Semester
@@ -117,10 +116,8 @@ Punkte				    	number(2) check (Punkte between 0 and 15),
 foreign key (Klausurschlüssel) references Klausur,
 foreign key (MatrNr) references Student);
 
-create table Kirche
-(Name				    	varchar(20),
-Hoehe					number(4),
-primary key (Name));
+
+
 
 
 
@@ -191,13 +188,13 @@ INSERT INTO SCHREIBT VALUES('2319845', 'DBWISE', 15);
 INSERT INTO SCHREIBT VALUES('2319195', 'DBWISE', 15);
 INSERT INTO SCHREIBT VALUES('2319846', 'DBWISE', 13);
 
+UPDATE FAKULTÄT
+set PersonalID=02 
+WHERE FAKULTÄTSNAME = 'BW';
 
 UPDATE FAKULTÄT
-	SET PERSONALID = '03'
-    WHERE FAKULTÄTSNAME = 'MI';
-
-
-INSERT INTO KIRCHE VALUES('Michel', '132');
+set PersonalID=03 
+WHERE FAKULTÄTSNAME = 'MI';
 
 
 

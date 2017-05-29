@@ -1,4 +1,4 @@
-1. Wie viele Studierende gibt es? 
+﻿1. Wie viele Studierende gibt es? 
 
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
@@ -29,7 +29,8 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 		 
 SELECT NAME, VORNAME FROM Student where STUDIENGANGSBEZEICHNUNG='BAI1' ORDER BY NAME ASC;		 
 
-Nimm alle Namen und Vornamen der Tabelle Student, bei denen STUDIENGANGSBEZEICHNUNG BAI1 ist und sortiere absteigend nach dem Namen.
+Nimm alle Namen und Vornamen der Tabelle Student, 
+bei denen STUDIENGANGSBEZEICHNUNG BAI1 ist und sortiere absteigend nach dem Namen.
 
 NAME                 VORNAME             
 -------------------- --------------------
@@ -48,6 +49,9 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 
 SELECT SUBSTR(Vorname, 1, 1) As NewVorname, Name from student where STUDIENGANGSBEZEICHNUNG='BAI1';
 
+Nimm alle Vornamen und Namen aus der Tabelle STUNDENT und erstelle einen Substring aus 
+Name biginnend ab Position 1 und 1 Char länge.
+
 N NAME                
 - --------------------
 T Schomacker          
@@ -64,6 +68,8 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt  
 
 SELECT NAME FROM Student where STUDIENGANGSBEZEICHNUNG='BWI1';
+
+Nimm alle Namen aus der Tabelle STUDENT, bei denen Die Semesterbezeichnung gleich 'BWI1' ist.
 
 NAME                
 --------------------
@@ -84,13 +90,17 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 
 SELECT MatrDatum, Name FROM Student WHERE Wohnort LIKE '%burg%' OR Wohnort LIKE '%Burg%';
 
+Nimm alle Martikel-datum und Name aus der Tabelle Student, bei denen im Wohnort die Zeichenkette 
+'Burg' oder 'burg' vorkommt.
+
 MATRDATU NAME                
 -------- --------------------
 01.01.70 Schomacker          
 01.01.70 Gerken     
 
          
-6. Die Namen sowie das Immatrikulationsdatum der Studierenden sowie die Bezeichnungen des Departments und der Fakultät ausgeben, wo sie immatrikuliert sind. 
+6. Die Namen sowie das Immatrikulationsdatum der Studierenden sowie die Bezeichnungen des Departments und 
+der Fakultät ausgeben, wo sie immatrikuliert sind. 
 
 MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
 ------- ---------- ---------- -------------------- -------------------- -------- --------------------
@@ -110,6 +120,9 @@ WI         BWI1
 SELECT Student.MatrDatum, Student.Name, Student.Departmentname, Department.Fakultätsname 
 FROM Student, Department
 WHERE Student.Departmentname=Department.Departmentname;
+
+Nimm alle Matrikel-daten, Namen, und Departmentnamen aus der Tabelle Student und Fakultätsnamen aus der Liste Department, 
+bei dennen der Departmentname übereinstimmt.
 
 MATRDATU NAME                 DEPARTMENT FAKULTÄTSN
 -------- -------------------- ---------- ----------
@@ -150,6 +163,8 @@ SELECT name
 FROM STUDENT, SCHREIBT, KLAUSUR
 WHERE KLAUSUR.Vorlesungsname='DB' AND schreibt.MatrNr=Student.MatrNr AND Schreibt.Punkte=15; 
 
+Nimm alle namen aus der Liste Studenten, bei denen Der Vorlesungsname 'DB' lautet, und Die Matrikelnummer des Studenten, 
+der die Klausur schreibt gleich der MAtrikelnummer des Studenten ist und bei denen Die Punkte 15 sind.
 
 NAME                
 --------------------
@@ -185,6 +200,11 @@ WHERE Schreibt.Punkte > (SELECT AVG(Punkte) FROM Schreibt WHERE Klausurschlüsse
     AND Schreibt.MatrNr=Student.MatrNr; 
 
 
+Nimm alle namen aus der Liste Student, 
+dessen Punkte in der Klausur mit dem Klausurenschlüssel "DBWISE" aus der Tabelle schreibt größer ist, 
+Als der Mittelwert aller geschriebenen Klausuren die den Klausurenschlüssel "DBWISE").
+
+
 NAME                
 --------------------
 Trendelenburg
@@ -204,6 +224,8 @@ MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
 2319846 DBWISE                       13
 
 SELECT AVG(Punkte) FROM Schreibt;
+
+Nimm den Durchschnitt von alles Einträgen der liste Schreibt
 
 AVG(PUNKTE)
 -----------
@@ -234,6 +256,9 @@ SELECT Name
 FROM STUDENT LEFT JOIN SCHREIBT ON STUDENT.MATRNR = SCHREIBT.MATRNR
 WHERE SCHREIBT.MATRNR IS NULL;
 
+Nimm alle Namen Der zusammengefügten Listen Student und Schreibt über den eintrag Matrikelnummer, 
+in der die Matrikelnummer aus schreibt null ist.
+
 NAME                
 --------------------
 Sack
@@ -241,7 +266,45 @@ Sack
 11. Wo ist es leichter oder wer ist besser?? Lassen Sie sich die Durchschnittspunktzahl in den einzelnen Studiengängen ausgeben.  
 
 
+
 12. Wie heißt der Dekan der Fakultät, in der z. B. der Student mit dem Namen Felix Nerd studiert? 
+
+
+
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                
+------- ---------- ---------- --------------------
+1234567 TI         BTI1       Mustermann          
+2319195 AI         BAI1       Schomacker          
+2319845 AI         BAI1       Trendelenburg     
+
+
+FAKULTÄTSN PERSONALID
+---------- ----------
+MI         3         
+BW         2         
+
+
+DEPARTMENT FAKULTÄTSN ANZAHLSTUDIS
+---------- ---------- ------------
+AI         MI                  200
+TI         MI                  200
+BL         BW                  150
+AL         BW                  150
+
+
+
+SELECT Fakultät.PersonalID
+FROM Fakultät, STUDENT, DEPARTMENT
+WHERE Student.Departmentname = Department.Departmentname 
+    AND Department.FAKULTÄTSNAME = Fakultät.Fakultätsname
+    AND Student.NAME='Mustermann';
+
+
 13. Wie hoch ist der Michel? 
- 
+
+SELECT
+
+Erstelle einen Substring von "Der Michel ist 132m hoch", 
+angefangen beim Char 16 und dann 11 Chars lang.
      
