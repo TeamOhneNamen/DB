@@ -1,7 +1,11 @@
 ﻿5. 
 Geben Sie für alle AI-Studierenden aus, ob sie an einer Klausur im Fach Datenbanken teilgenommen haben. Wenn ja, mit dem Klausurdatum, wenn nein stattdessen mit NULL oder ähnlich
 
-
+SELECT Distinct Student.Name, Klausur.Klausurdatum 
+FROM Vorlesung
+left JOIN Klausur ON KLausur.Vorlesungsname = 'DB'
+left JOIN Schreibt ON Schreibt.Klausurschlüssel = klausur.Klausurschlüssel
+full JOIN Student ON STUDENT.MATRNR = SCHREIBT.MATRNR;
 
 6. 
 Geben Sie die Titel (Bezeichnung) der Vorlesungen aus, die der Professor Eisenhart nicht unterrichtet
