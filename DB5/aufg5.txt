@@ -1,7 +1,36 @@
-﻿6. 
+﻿5. 
+Geben Sie für alle AI-Studierenden aus, ob sie an einer Klausur im Fach Datenbanken teilgenommen haben. Wenn ja, mit dem Klausurdatum, wenn nein stattdessen mit NULL oder ähnlich
+
+
+
+6. 
 Geben Sie die Titel (Bezeichnung) der Vorlesungen aus, die der Professor Eisenhart nicht unterrichtet
 
-Select Vorlesungsname from Vorlesung, Dozent where Vorlesung.PERSONALID <> '06'; 
+Select Vorlesungsname from Vorlesung, Dozent where Vorlesung.PERSONALID <> '06';
+
+7. 
+Geben Sie für alle Teilnehmer der Datenbankklausur im WS2015/16 statt der Punktzahl 1..15 die Note aus. 15-13: sehr gut, 12-10: gut, 9-7: befriedigend, 6,5: ausreichend, <5: nicht bestanden. 
+
+select MatrNr,
+    case SCHREIBT.Punkte
+        when 15 then 'sehr gut'
+        when 14 then 'sehr gut'
+        when 13 then 'sehr gut'
+        when 12 then 'gut'
+        when 11 then 'gut'
+        when 10 then 'gut'
+        when 9 then 'befriedigend'
+        when 8 then 'befriedigend'
+        when 7 then 'befriedigend'
+        when 6 then 'ausreichend'
+        when 5 then 'ausreichend'
+        when 4 then 'nicht bestanden'
+        when 3 then 'nicht bestanden'
+        when 2 then 'nicht bestanden'
+        when 1 then 'nicht bestanden'
+        when 0 then 'nicht bestanden'
+    end as Punkte
+from schreibt;
 
 8.
 Erstellen Sie drei Views, die für die Professoren, wissenschaftlichen Mitarbeiter und das Verwaltungspersonal jeweils die spezifischen Attribute und die aus der Tabelle Mitarbeiter enthält. 
