@@ -1,0 +1,19 @@
+﻿8.
+Erstellen Sie drei Views, die für die Professoren, wissenschaftlichen Mitarbeiter und das Verwaltungspersonal jeweils die spezifischen Attribute und die aus der Tabelle Mitarbeiter enthält. 
+
+
+
+9. 
+Erstellen Sie eine View, die die Namen der Studierenden, die Bezeichnung ihres Studiengangs und die Bezeichnung des zugehörigen Departments enthält. 
+Warum ist hier kein INSERT möglich?
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt   
+
+CREATE	VIEW	StudiInfo	(Name, Studiengangsbezeichnung, Departmentname)	
+AS	SELECT  Name, Studiengangsbezeichnung, Departmentname FROM Student;
