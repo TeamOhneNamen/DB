@@ -1,4 +1,9 @@
-﻿8.
+﻿6. 
+Geben Sie die Titel (Bezeichnung) der Vorlesungen aus, die der Professor Eisenhart nicht unterrichtet
+
+Select Vorlesungsname from Vorlesung, Dozent where Vorlesung.PERSONALID <> '06'; 
+
+8.
 Erstellen Sie drei Views, die für die Professoren, wissenschaftlichen Mitarbeiter und das Verwaltungspersonal jeweils die spezifischen Attribute und die aus der Tabelle Mitarbeiter enthält. 
 
 CREATE	VIEW	DozInfo	(Name, PersonalID, Departmentname)	
