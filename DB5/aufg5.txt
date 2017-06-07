@@ -1,19 +1,103 @@
 ﻿5. 
 Geben Sie für alle AI-Studierenden aus, ob sie an einer Klausur im Fach Datenbanken teilgenommen haben. Wenn ja, mit dem Klausurdatum, wenn nein stattdessen mit NULL oder ähnlich
 
+PERSONALID VORLESUNGS STUDIENGAN
+---------- ---------- ----------
+01         PM1        BAI1      
+01         PM2        BAI2      
+03         DB         BAI2      
+03         LB         BAI2      
+03         MG         BAI1      
+06         RBK        BAI3      
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+9876554 AI         BAI1       James                Bond                 01.01.70 England             
+
+BEGIN DAUER      RAUM KLAUSURD VORLESUNGS SEMESTERBE KLAUSURSCHLÜSSEL    
+----- ---------- ---- -------- ---------- ---------- --------------------
+0800  120        1085 01.01.70 PM1        SS 2017    PM1SOSE             
+0800  120        1001 01.07.70 MG         SS 2017    MGSOSE              
+0800  120        1001 01.07.70 MG         SS 2017    MGWISE              
+0800  120        1001 01.07.70 DB         WS 2016/17 DBWISE              
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+9876554 DBWISE                       15
+
+
 SELECT Distinct Student.Name, Klausur.Klausurdatum 
 FROM Vorlesung
 left JOIN Klausur ON KLausur.Vorlesungsname = 'DB'
 left JOIN Schreibt ON Schreibt.Klausurschlüssel = klausur.Klausurschlüssel
-full JOIN Student ON STUDENT.MATRNR = SCHREIBT.MATRNR;
+full JOIN Student ON STUDENT.MATRNR = SCHREIBT.MATRNR; 
+
+
+NAME                 KLAUSURD
+-------------------- --------
+Mustermann           01.07.70
+Trendelenburg        01.07.70
+James                01.07.70
+Sack                         
+Schomacker           01.07.70
+Gerken               01.07.70
 
 6. 
 Geben Sie die Titel (Bezeichnung) der Vorlesungen aus, die der Professor Eisenhart nicht unterrichtet
 
-Select Vorlesungsname from Vorlesung, Dozent where Vorlesung.PERSONALID <> '06';
+PERSONALID VORLESUNGS STUDIENGAN
+---------- ---------- ----------
+01         PM1        BAI1      
+01         PM2        BAI2      
+03         DB         BAI2      
+03         LB         BAI2      
+03         MG         BAI1      
+06         RBK        BAI3      
+
+PERSONALID DOZKÜRZEL 
+---------- ----------
+01         BK        
+03         GER       
+06         EIS       
+
+Select Distinct Vorlesungsname from Vorlesung, Dozent where Vorlesung.PERSONALID <> '06';
+
+VORLESUNGS
+----------
+MG
+PM2
+PM1
+LB
+DB
+
+Wähle alle Vorlesungsnamen von Vorlesungen, bei denen die PersonalID nicht die von Professor Eisenhart ist.
 
 7. 
 Geben Sie für alle Teilnehmer der Datenbankklausur im WS2015/16 statt der Punktzahl 1..15 die Note aus. 15-13: sehr gut, 12-10: gut, 9-7: befriedigend, 6,5: ausreichend, <5: nicht bestanden. 
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+9876554 DBWISE                       15
+
 
 select MatrNr,
     case SCHREIBT.Punkte
@@ -34,22 +118,64 @@ select MatrNr,
         when 1 then 'nicht bestanden'
         when 0 then 'nicht bestanden'
     end as Punkte
-from schreibt;
+from schreibt
+where Klausurschlüssel = 'DBWISE';  
+
+
+MATRNR  PUNKTE         
+------- ---------------
+1234567 ausreichend    
+2319845 sehr gut       
+2319195 sehr gut       
+2319846 sehr gut       
+9876554 sehr gut      
+
+
+Wähle alle MatrNr und Punkte von Schreibt, die zur Klausur DBWISE gehören und ersetze die numerischen Punkte durch Strings, der Aufgabe entsprechend.     
 
 8.
 Erstellen Sie drei Views, die für die Professoren, wissenschaftlichen Mitarbeiter und das Verwaltungspersonal jeweils die spezifischen Attribute und die aus der Tabelle Mitarbeiter enthält. 
+
+PERSONALID DEPARTMENT NAME                
+---------- ---------- --------------------
+01         AI         BERND KAHLBRANT     
+02         AI         GERT ÖLKER          
+03         AI         GERKEN              
+04         TI         KLAUS KLEBER        
+05         BL         GUNDULA GAUSE       
+06         AI         ERNIE EISENHART    
+
+a)
+PERSONALID DOZKÜRZEL 
+---------- ----------
+01         BK        
+03         GER       
+06         EIS       
 
 CREATE	VIEW	DozInfo	(Name, PersonalID, Departmentname)	
 AS	SELECT  Mitarbeiter.Name, Mitarbeiter.PersonalID, Mitarbeiter.Departmentname 
 FROM Mitarbeiter, Dozent WHERE	Mitarbeiter.PersonalID	=	Dozent.PersonalID;
 
+b)
+PERSONALID FACHGEBIET
+---------- ----------
+02         GÖ        
+
 CREATE	VIEW	WiMiInfo	(Name, PersonalID, Departmentname)	
 AS	SELECT Mitarbeiter.Name, Mitarbeiter.PersonalID, Mitarbeiter.Departmentname 
 FROM Mitarbeiter, Wis_Mitarbeiter WHERE	Mitarbeiter.PersonalID	=	Wis_Mitarbeiter.PersonalID;
 
+c)
+PERSONALID KOSTENSTEL
+---------- ----------
+04         KK        
+05         GG        
+
 CREATE	VIEW	VerPerInfo	(Name, PersonalID, Departmentname)	
 AS	SELECT Mitarbeiter.Name, Mitarbeiter.PersonalID, Mitarbeiter.Departmentname 
 FROM Mitarbeiter, Verwaltungspersonal WHERE	Mitarbeiter.PersonalID	=	Verwaltungspersonal.PersonalID;
+
+Wähle Name, PersonalID und Departmentname von allen Dozent/Wis_Mitarbeiter/Verwaltungspersonal 
 
 9. 
 Erstellen Sie eine View, die die Namen der Studierenden, die Bezeichnung ihres Studiengangs und die Bezeichnung des zugehörigen Departments enthält. 
@@ -61,7 +187,10 @@ MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU
 2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
 2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
 2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
-9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt   
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+9876554 AI         BAI1       James                Bond                 01.01.70 England             
 
 CREATE	VIEW	StudiInfo	(Name, Studiengangsbezeichnung, Departmentname)	
 AS	SELECT  Name, Studiengangsbezeichnung, Departmentname FROM Student;
+
+Wähle Name, Studiengangsbezeichnung und Departmentname von allen Studenten
