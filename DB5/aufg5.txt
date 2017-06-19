@@ -1,4 +1,237 @@
-﻿5. 
+1. Geben Sie die Namen der Studierenden aus, die Vorlesungen bei Professor Eisenhart besuchen.
+
+Student:
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt    		 
+
+Mitarbeiter:
+
+PERSONALID DEPARTMENT NAME                
+---------- ---------- --------------------
+01         AI         BERND KAHLBRANT     
+02         AI         GERT ÖLKER          
+03         AI         GERKEN              
+04         TI         KLAUS KLEBER        
+05 	   BL 	      GUNDULA GAUSE 
+06         AI         ERNIE EISENHART  
+
+Besucht:
+
+MATRNR  VORLESUNGS
+------- ----------
+2319845 PM2       
+2319845 DB        
+2319845 LB        
+1234567 PM1       
+1234567 RBK  
+
+Vorlesung:
+
+PERSONALID VORLESUNGS STUDIENGAN
+---------- ---------- ----------
+01         PM1        BAI1      
+01         PM2        BAI2      
+03         DB         BAI2      
+03         LB         BAI2      
+03         MG         BAI1      
+06         RBK        BAI3    
+		 
+
+SELECT STUDENT.NAME, STUDENT.VORNAME 
+  FROM STUDENT, MITARBEITER, BESUCHT, VORLESUNG
+  where STUDENT.MATRNR = BESUCHT.MATRNR 
+    AND BESUCHT.VORLESUNGSNAME = VORLESUNG.VORLESUNGSNAME 
+    AND VORLESUNG.PERSONALID = MITARBEITER.PERSONALID 
+    AND MITARBEITER.NAME = 'ERNIE EISENHART';
+
+
+Nimm alle Namen und Vornamen der Tabelle Student, 
+bei der die Vorlesung besucht, die der Professor mit dem Namen 'ERNIE EISENHART' hält.
+
+NAME                 VORNAME             
+-------------------- --------------------
+Mustermann           Max                 
+
+
+2. Welche Studierenden haben im Fach mit der Bezeichnung Datenbanken in der Klausur im 
+	WS 2016/17 dieselbe Punktzahl erreicht wie der Student James Bond. 
+
+Student:
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Burg Gerken         
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt    	
+
+Schreibt:
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+9876554 DBWISE                       15
+
+Klausur:
+
+BEGIN DAUER      RAUM KLAUSURD VORLESUNGS SEMESTERBE KLAUSURSCHLÜSSEL    
+----- ---------- ---- -------- ---------- ---------- --------------------
+0800  120        1085 01.01.70 PM1        SOSE       PM1SOSE             
+0800  120        1001 01.07.70 MG         SOSE       MGSOSE              
+0800  120        1001 01.07.70 MG         WISE       MGWISE              
+0800  120        1001 01.07.70 DB         WISE       DBWISE 
+
+
+SELECT STUDENT.NAME, STUDENT.VORNAME 
+  FROM STUDENT, SCHREIBT, KLAUSUR
+  where STUDENT.MATRNR = SCHREIBT.MATRNR
+    AND SCHREIBT.KLAUSURSCHLÜSSEL = KLAUSUR.KLAUSURSCHLÜSSEL
+    AND KLAUSUR.VORLESUNGSNAME = 'DB'
+    AND KLAUSUR.SEMESTERBEZEICHNUNG = 'WS 2016/17'
+    AND SCHREIBT.PUNKTE = (SELECT Punkte FROM SCHREIBT WHERE SCHREIBT.MATRNR= '9876554');
+
+
+Nimm alle Studenten, die Eine Klausur in dem Fach 'DB' schreiben, die Im Semester mit der Semesterbezeichnnung 'WS 2016/17' geschrieben wurde 
+	und die Selben Punkte in dieser Klausur erreicht haben
+
+
+NAME                 VORNAME             
+-------------------- --------------------
+Trendelenburg        Ferdinand           
+Schomacker           Thorben             
+James                Bond  
+
+3. Geben Sie die Namen der Studierenden im Studiengang AI aus, die an einer Klausur im Fach Datenbanken teilgenommen haben. 
+Formulieren Sie diese Query auf drei verschiedene Arten (Join, Subquery, Exist). 
+
+Student:
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+9876554 AI         BAI1       James                Bond                 01.01.70 England             
+ 
+
+
+Schreibt:
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+9876554 DBWISE                       15
+
+
+
+Klausur:
+
+BEGIN DAUER      RAUM KLAUSURD VORLESUNGS SEMESTERBE KLAUSURSCHLÜSSEL    
+----- ---------- ---- -------- ---------- ---------- --------------------
+0800  120        1085 01.01.70 PM1        SS 2017    PM1SOSE             
+0800  120        1001 01.07.70 MG         SS 2017    MGSOSE              
+0800  120        1001 01.07.70 MG         SS 2017    MGWISE              
+0800  120        1001 01.07.70 DB         WS 2016/17 DBWISE  
+
+
+JOIN:
+
+
+
+
+
+
+
+
+
+
+NAME                
+--------------------
+Mustermann
+Trendelenburg
+Schomacker
+Gerken
+James
+
+
+4.  Geben Sie die Namen der AI-Studierenden aus, die bisher an keiner DatenbankKlausur teilgenommen haben
+
+
+Student:
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+9876554 AI         BAI1       James                Bond                 01.01.70 England             
+
+6 Zeilen gewählt. 
+
+
+Schreibt:
+
+MATRNR  KLAUSURSCHLÜSSEL         PUNKTE
+------- -------------------- ----------
+1234567 PM1SOSE                      13
+2319845 MGSOSE                        0
+2319845 MGWISE                       13
+1234567 DBWISE                        5
+2319845 DBWISE                       15
+2319195 DBWISE                       15
+2319846 DBWISE                       13
+9876554 DBWISE                       15
+
+
+
+Klausur:
+
+BEGIN DAUER      RAUM KLAUSURD VORLESUNGS SEMESTERBE KLAUSURSCHLÜSSEL    
+----- ---------- ---- -------- ---------- ---------- --------------------
+0800  120        1085 01.01.70 PM1        SS 2017    PM1SOSE             
+0800  120        1001 01.07.70 MG         SS 2017    MGSOSE              
+0800  120        1001 01.07.70 MG         SS 2017    MGWISE              
+0800  120        1001 01.07.70 DB         WS 2016/17 DBWISE  
+
+
+
+SELECT Name
+FROM STUDENT
+  WHERE MATRNR NOT IN (SELECT SCHREIBT.MATRNR FROM SCHREIBT, KLAUSUR
+                            WHERE SCHREIBT.KLAUSURSCHLÜSSEL=KLAUSUR.KLAUSURSCHLÜSSEL
+                            AND KLAUSUR.Vorlesungsname = 'DB');
+
+Nimm die Namen aus der Tabelle Student, der nciht in der Tabelle "hat DB Klausur geschrieben" vorkommt.
+
+
+NAME                
+--------------------
+Sack
+
+5. 
 Geben Sie für alle AI-Studierenden aus, ob sie an einer Klausur im Fach Datenbanken teilgenommen haben. Wenn ja, mit dem Klausurdatum, wenn nein stattdessen mit NULL oder ähnlich
 
 PERSONALID VORLESUNGS STUDIENGAN
