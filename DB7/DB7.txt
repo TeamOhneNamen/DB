@@ -1,0 +1,47 @@
+1.)
+
+MATRNR  DEPARTMENT STUDIENGAN NAME                 VORNAME              MATRDATU WOHNORT             
+------- ---------- ---------- -------------------- -------------------- -------- --------------------
+1234567 TI         BTI1       Mustermann           Max                  01.01.70 Musterhausen        
+2319195 AI         BAI1       Schomacker           Thorben              01.01.70 Hamburg             
+2319845 AI         BAI1       Trendelenburg        Ferdinand            01.01.70 Berlin              
+2319846 WI         BWI1       Gerken               Gerken               01.01.70 Gerkenburg          
+9876543 WI         BWI1       Sack                 Fauler               01.01.70 Sackstadt           
+9876554 AI         BAI1       James                Bond                 01.01.70 England             
+
+DEPARTMENT STUDIENGAN ANZAHLSTUDIS
+---------- ---------- ------------
+TI         BTI1                  1
+AI         BAI1                  3
+AI         BAI2                  0
+AI         BAI3                  0
+WI         BWI1                  2
+
+ALTER TABLE studiengang
+ADD anzahlstudis number(5); 
+
+update studiengang
+set anzahlstudis =
+(select count (*) from student
+where student.studiengangsbezeichnung = studiengang.studiengangsbezeichnung);
+
+DELETE FROM student
+WHERE Matrnr='9876543';
+
+drop trigger AnzahlStudis;
+CREATE	TRIGGER	AnzahlStudis	BEFORE	INSERT	OR	UPDATE	OF	Studiengangsbezeichnung	OR	DELETE	ON	Student	FOR	EACH	ROW 
+BEGIN 
+  IF	:NEW.Studiengangsbezeichnung	IS	NOT	NULL THEN	UPDATE	Studiengang	SET	AnzahlStudis=AnzahlStudis+1	
+    WHERE	Studiengangsbezeichnung=:NEW.Studiengangsbezeichnung END IF;
+  IF	:OLD.Studiengangsbezeichnung	IS	NOT	NULL THEN	UPDATE	Studiengang	SET	AnzahlStudis=AnzahlStudis-1	
+    WHERE	Studiengangsbezeichnung=:OLD.Studiengangsbezeichnung END	IF;
+END;
+
+INSERT INTO Student VALUES ('9876543','WI', 'BWI1', 'Sack', 'Fauler', '01.01.1970', 'Sackstadt');
+
+2.)
+
+
+
+
+

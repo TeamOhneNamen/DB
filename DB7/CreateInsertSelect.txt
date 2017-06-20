@@ -1,0 +1,224 @@
+drop table Dozent CASCADE CONSTRAINTS;
+drop table Fakultät CASCADE CONSTRAINTS;
+drop table Semester CASCADE CONSTRAINTS;
+drop table Studiengang CASCADE CONSTRAINTS;
+drop table Uebung CASCADE CONSTRAINTS;
+drop table Verwaltungspersonal CASCADE CONSTRAINTS;
+drop table Student CASCADE CONSTRAINTS;
+drop table Wis_Mitarbeiter CASCADE CONSTRAINTS;
+drop table Department CASCADE CONSTRAINTS;
+drop table Klausur CASCADE CONSTRAINTS;
+drop table Vorlesung CASCADE CONSTRAINTS;
+drop table Mitarbeiter CASCADE CONSTRAINTS;
+drop table BESUCHT CASCADE CONSTRAINTS;
+drop table SCHREIBT CASCADE CONSTRAINTS;
+
+
+
+create table Semester
+(Semesterbezeichnung	varchar(10), 
+Enddatum			date, 
+Beginndatum			date,
+primary key (Semesterbezeichnung));
+
+create table Fakultät
+(Fakultätsname			varchar(10),
+PersonalID          number(5),
+primary key (Fakultätsname));
+
+create table Department
+(Departmentname		varchar(10),
+Fakultätsname		varchar(10),
+AnzahlStudis		number,
+primary key (Departmentname),
+foreign key (Fakultätsname) references Fakultät);
+
+create table Mitarbeiter
+(PersonalID          number(5),
+Departmentname		varchar(10),
+Name				      varchar(20),
+primary key (PersonalID),
+foreign key (Departmentname) references Department);
+
+create table Dozent
+(PersonalID          number(5),
+DozKürzel				varchar(10),
+foreign key (PersonalID) references Mitarbeiter,
+primary key (PersonalID));
+
+create table Studiengang
+(Departmentname		varchar(10),
+Studiengangsbezeichnung	varchar(10),
+primary key (Studiengangsbezeichnung),
+foreign key (Departmentname) references Department);
+
+create table Student
+(MatrNr				varchar(7),
+Departmentname			varchar(10),
+Studiengangsbezeichnung		varchar(10),
+Name				varchar(20),
+Vorname				varchar(20),
+MatrDatum			date,
+Wohnort				Varchar(20),
+primary key (MatrNr),
+foreign key (Studiengangsbezeichnung) references Studiengang,
+foreign key (Departmentname) references Department);
+
+
+create table Verwaltungspersonal
+(PersonalID          number(5),
+Kostenstelle			varchar(10),
+primary key (PersonalID),
+foreign key (PersonalID) references Mitarbeiter);
+
+create table Vorlesung
+(PersonalID          number(5),
+Vorlesungsname			varchar(10),
+Studiengangsbezeichnung		varchar(10),
+primary key (Vorlesungsname),
+foreign key (Studiengangsbezeichnung) references Studiengang,
+foreign key (PersonalID) references Dozent);
+
+create table Besucht
+(MatrNr				varchar(7),
+Vorlesungsname			varchar(10),
+foreign key (Vorlesungsname) references Vorlesung,
+foreign key (MatrNr) references Student);
+
+create table Wis_Mitarbeiter
+(PersonalID          number(5),
+Fachgebiet				varchar(10),
+primary key (PersonalID),
+foreign key (PersonalID) references Mitarbeiter);
+
+create table Uebung
+(Vorlesungsname		varchar(10),
+PersonalID				varchar(10),
+primary key (Vorlesungsname),
+foreign key (PersonalID) references Wis_Mitarbeiter);
+
+create table Klausur
+(Beginnzeit			    varchar(5),
+Dauer				    varchar(10),
+Raum				    varchar(4),
+Klausurdatum  			date,
+Vorlesungsname			varchar(10),
+Semesterbezeichnung		varchar(10),
+Klausurschlüssel        varchar(20),
+foreign key (Vorlesungsname) references Vorlesung,
+foreign key (Semesterbezeichnung) references Semester,
+primary key (Klausurschlüssel));
+
+create table Schreibt
+(MatrNr				    	varchar(7),
+Klausurschlüssel			varchar(20),
+Punkte				    	number(2) check (Punkte between 0 and 15),
+foreign key (Klausurschlüssel) references Klausur,
+foreign key (MatrNr) references Student);
+
+
+
+
+
+
+INSERT INTO FAKULTÄT VALUES ('MI', 0);
+INSERT INTO FAKULTÄT VALUES ('BW', 0);
+
+INSERT INTO DEPARTMENT VALUES ('AI', 'MI', 200);
+INSERT INTO DEPARTMENT VALUES ('TI', 'MI', 200);
+INSERT INTO DEPARTMENT VALUES ('WI', 'BW', 150);
+INSERT INTO DEPARTMENT VALUES ('BL', 'BW', 150);
+INSERT INTO DEPARTMENT VALUES ('AL', 'BW', 150);
+
+INSERT INTO Semester VALUES ('WS 2016/17', '01.01.1970', '01.08.1970');
+INSERT INTO Semester VALUES ('SS 2017', '01.07.1970', '01.12.1970');
+
+INSERT INTO Studiengang VALUES ('TI', 'BTI1');
+INSERT INTO Studiengang VALUES ('AI', 'BAI1');
+INSERT INTO Studiengang VALUES ('AI', 'BAI2');
+INSERT INTO Studiengang VALUES ('AI', 'BAI3');
+INSERT INTO Studiengang VALUES ('WI', 'BWI1');
+
+INSERT INTO Mitarbeiter VALUES (01,'AI', 'BERND KAHLBRANT');
+INSERT INTO Mitarbeiter VALUES (02,'AI', 'GERT ÖLKER');
+INSERT INTO Mitarbeiter VALUES (03,'AI', 'GERKEN');
+INSERT INTO Mitarbeiter VALUES (04,'TI', 'KLAUS KLEBER');
+INSERT INTO Mitarbeiter VALUES (05,'BL', 'GUNDULA GAUSE');
+INSERT INTO Mitarbeiter VALUES (06,'AI', 'ERNIE EISENHART');
+
+INSERT INTO Dozent VALUES (01,'BK');
+INSERT INTO Dozent VALUES (03, 'GER');
+INSERT INTO Dozent VALUES (06, 'EIS');
+
+INSERT INTO Wis_Mitarbeiter VALUES('02', 'GÖ');
+
+INSERT INTO Verwaltungspersonal VALUES(04, 'KK');
+INSERT INTO Verwaltungspersonal VALUES(05, 'GG');
+
+INSERT INTO Vorlesung VALUES (01,'PM1', 'BAI1');
+INSERT INTO Vorlesung VALUES (01,'PM2', 'BAI2');
+INSERT INTO Vorlesung VALUES (03,'DB', 'BAI2');
+INSERT INTO Vorlesung VALUES (03,'LB', 'BAI2');
+INSERT INTO Vorlesung VALUES (03,'MG', 'BAI1');
+INSERT INTO Vorlesung VALUES (06,'RBK', 'BAI3');
+
+
+INSERT INTO Student VALUES ('1234567','TI', 'BTI1', 'Mustermann', 'Max', '01.01.1970', 'Musterhausen');
+INSERT INTO Student VALUES ('2319195','AI', 'BAI1', 'Schomacker', 'Thorben', '01.01.1970', 'Hamburg');
+INSERT INTO Student VALUES ('2319845','AI', 'BAI1', 'Trendelenburg', 'Ferdinand', '01.01.1970', 'Berlin');
+INSERT INTO Student VALUES ('2319846','WI', 'BWI1', 'Gerken', 'Gerken', '01.01.1970', 'Gerkenburg');
+INSERT INTO Student VALUES ('9876543','WI', 'BWI1', 'Sack', 'Fauler', '01.01.1970', 'Sackstadt');
+INSERT INTO Student VALUES ('9876554','AI', 'BAI1', 'James', 'Bond', '01.01.1970', 'England');
+
+INSERT INTO BESUCHT VALUES ('2319845', 'PM2');
+INSERT INTO BESUCHT VALUES ('2319845', 'DB');
+INSERT INTO BESUCHT VALUES ('2319845', 'LB');
+INSERT INTO BESUCHT VALUES ('1234567', 'PM1');
+INSERT INTO BESUCHT VALUES ('1234567', 'RBK');
+INSERT INTO BESUCHT VALUES ('9876554', 'DB');
+
+
+INSERT INTO Uebung VALUES ('PM1', 02);
+INSERT INTO Uebung VALUES ('PM2', 02);
+
+
+INSERT INTO Klausur VALUES ('0800','120', '1085', '01.01.1970', 'PM1', 'SS 2017', 'PM1SOSE');
+INSERT INTO Klausur VALUES ('0800','120', '1001', '01.07.1970', 'MG', 'SS 2017', 'MGSOSE');
+INSERT INTO Klausur VALUES ('0800','120', '1001', '01.07.1970', 'MG', 'SS 2017', 'MGWISE');
+INSERT INTO Klausur VALUES ('0800','120', '1001', '01.07.1970', 'DB', 'WS 2016/17', 'DBWISE');
+
+INSERT INTO SCHREIBT VALUES('1234567', 'PM1SOSE', 13);
+INSERT INTO SCHREIBT VALUES('2319845', 'MGSOSE', 0);
+INSERT INTO SCHREIBT VALUES('2319845', 'MGWISE', 13);
+
+INSERT INTO SCHREIBT VALUES('1234567', 'DBWISE', 5);
+INSERT INTO SCHREIBT VALUES('2319845', 'DBWISE', 15);
+INSERT INTO SCHREIBT VALUES('2319195', 'DBWISE', 15);
+INSERT INTO SCHREIBT VALUES('2319846', 'DBWISE', 13);
+INSERT INTO SCHREIBT VALUES('9876554', 'DBWISE', 15);
+
+UPDATE FAKULTÄT
+set PersonalID=02 
+WHERE FAKULTÄTSNAME = 'BW';
+
+UPDATE FAKULTÄT
+set PersonalID=03 
+WHERE FAKULTÄTSNAME = 'MI';
+
+
+
+SELECT * FROM FAKULTÄT;
+SELECT * FROM DEPARTMENT;
+SELECT * FROM MITARBEITER;
+SELECT * FROM DOZENT;
+SELECT * FROM WIS_MITARBEITER; 
+SELECT * FROM VERWALTUNGSPERSONAL; 
+SELECT * FROM STUDENT; 
+SELECT * FROM SEMESTER; 
+SELECT * FROM STUDIENGANG; 
+SELECT * FROM VORLESUNG; 
+SELECT * FROM UEBUNG; 
+SELECT * FROM KLAUSUR;
+SELECT * FROM SCHREIBT;
+SELECT * FROM BESUCHT;
+    
