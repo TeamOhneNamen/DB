@@ -93,7 +93,7 @@ foreign key (PersonalID) references Mitarbeiter);
 
 create table Uebung
 (Vorlesungsname		varchar(10),
-PersonalID				varchar(10),
+PersonalID			number(5),
 primary key (Vorlesungsname),
 foreign key (PersonalID) references Wis_Mitarbeiter);
 
@@ -150,7 +150,7 @@ INSERT INTO Dozent VALUES (01,'BK');
 INSERT INTO Dozent VALUES (03, 'GER');
 INSERT INTO Dozent VALUES (06, 'EIS');
 
-INSERT INTO Wis_Mitarbeiter VALUES('02', 'GÖ');
+INSERT INTO Wis_Mitarbeiter VALUES(02, 'GÖ');
 
 INSERT INTO Verwaltungspersonal VALUES(04, 'KK');
 INSERT INTO Verwaltungspersonal VALUES(05, 'GG');

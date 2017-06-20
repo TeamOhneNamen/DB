@@ -29,6 +29,7 @@ DELETE FROM student
 WHERE Matrnr='9876543';
 
 drop trigger AnzahlStudis;
+
 CREATE	TRIGGER	AnzahlStudis	BEFORE	INSERT	OR	UPDATE	OF	Studiengangsbezeichnung	OR	DELETE	ON	Student	FOR	EACH	ROW 
 BEGIN 
   IF	:NEW.Studiengangsbezeichnung	IS	NOT	NULL THEN	UPDATE	Studiengang	SET	AnzahlStudis=AnzahlStudis+1	
@@ -40,6 +41,44 @@ END;
 INSERT INTO Student VALUES ('9876543','WI', 'BWI1', 'Sack', 'Fauler', '01.01.1970', 'Sackstadt');
 
 2.)
+
+CREATE	VIEW	WiMiInfo	(Name, PersonalID, Departmentname, Fachgebiet)	
+AS	SELECT Mitarbeiter.Name, Mitarbeiter.PersonalID, Mitarbeiter.Departmentname, Wis_Mitarbeiter.Fachgebiet
+FROM Mitarbeiter, Wis_Mitarbeiter WHERE	Mitarbeiter.PersonalID	=	Wis_Mitarbeiter.PersonalID;
+
+CREATE OR REPLACE TRIGGER Wis_Mitarbeiter
+INSTEAD OF INSERT 
+ON WiMiInfo
+FOR EACH ROW
+DECLARE
+ x INTEGER;
+BEGIN
+  SELECT COUNT(*)
+  INTO x
+  FROM Mitarbeiter;
+  INSERT INTO Mitarbeiter
+       SELECT x, departmentname, Name FROM Mitarbeiter;
+       
+  INSERT INTO Wis_Mitarbeiter 
+  SELECT x, fachgebiet FROM Wis_Mitarbeiter;
+   
+INSERT INTO Mitarbeiter (personalid, departmentname)
+         VALUES(x, :new.departmentname);
+END;
+
+
+
+3.)
+select name from student 
+where Wohnort='Hamburg'
+and studiengangsbezeichnung = 'BWI1'
+order by name ;
+
+1. Sortiere die Daten wie geforder
+2. Greife auf Tabelle zu
+3. Filtere die Daten wie gefordert: Verbinde Filter(UND/ODER)
+
+
 
 
 
