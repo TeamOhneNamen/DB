@@ -46,25 +46,72 @@ CREATE	VIEW	WiMiInfo	(Name, PersonalID, Departmentname, Fachgebiet)
 AS	SELECT Mitarbeiter.Name, Mitarbeiter.PersonalID, Mitarbeiter.Departmentname, Wis_Mitarbeiter.Fachgebiet
 FROM Mitarbeiter, Wis_Mitarbeiter WHERE	Mitarbeiter.PersonalID	=	Wis_Mitarbeiter.PersonalID;
 
-CREATE OR REPLACE TRIGGER Wis_Mitarbeiter
-INSTEAD OF INSERT 
-ON WiMiInfo
-FOR EACH ROW
+CREATE OR REPLACE TRIGGER insert_WiMiInfo
+  INSTEAD OF INSERT ON WiMiInfo
 DECLARE
- x INTEGER;
+x INTEGER;
 BEGIN
-  SELECT COUNT(*)
+  SELECT COUNT(*) + 1
   INTO x
-  FROM Mitarbeiter;
-  INSERT INTO Mitarbeiter
-       SELECT x, departmentname, Name FROM Mitarbeiter;
-       
-  INSERT INTO Wis_Mitarbeiter 
-  SELECT x, fachgebiet FROM Wis_Mitarbeiter;
-   
+FROM Mitarbeiter;
+
+
+
 INSERT INTO Mitarbeiter (personalid, departmentname)
-         VALUES(x, :new.departmentname);
+VALUES(x, :new.departmentname);
+
+INSERT INTO  Wis_Mitarbeiter (personalid, fachgebiet)
+VALUES(x, :new.fachgebiet);
 END;
+/
+
+CREATE	VIEW	DozInfo	(Name, PersonalID, Departmentname, Dozkürzel)	
+AS	SELECT  Mitarbeiter.Name, Mitarbeiter.PersonalID, Mitarbeiter.Departmentname, Dozent.Dozkürzel
+FROM Mitarbeiter, Dozent WHERE	Mitarbeiter.PersonalID	=	Dozent.PersonalID;
+
+CREATE OR REPLACE TRIGGER insert_DozInfo
+  INSTEAD OF INSERT ON DozInfo
+DECLARE
+x INTEGER;
+BEGIN
+  SELECT COUNT(*) + 1
+  INTO x
+FROM Mitarbeiter;
+
+
+
+INSERT INTO Mitarbeiter (personalid, departmentname)
+VALUES(x, :new.departmentname);
+
+INSERT INTO  Dozent (personalid, dozkürzel)
+VALUES(x, :new.dozkürzel);
+END;
+/
+
+CREATE	VIEW	VerPerInfo	(Name, PersonalID, Departmentname, Kostenstelle)	
+AS	SELECT Mitarbeiter.Name, Mitarbeiter.PersonalID, Mitarbeiter.Departmentname, VerwaltungsPersonal.Kostenstelle 
+FROM Mitarbeiter, Verwaltungspersonal WHERE	Mitarbeiter.PersonalID	=	Verwaltungspersonal.PersonalID;
+
+CREATE OR REPLACE TRIGGER insert_VerPerInfo
+  INSTEAD OF INSERT ON VerPerInfo
+DECLARE
+x INTEGER;
+BEGIN
+  SELECT COUNT(*) + 1
+  INTO x
+FROM Mitarbeiter;
+
+
+
+INSERT INTO Mitarbeiter (personalid, departmentname)
+VALUES(x, :new.departmentname);
+
+INSERT INTO  VerPerInfo (personalid, Kostenstelle)
+VALUES(x, :new.Kostenstelle);
+END;
+/
+
+
 
 
 
