@@ -30,12 +30,17 @@ WHERE Matrnr='9876543';
 
 drop trigger AnzahlStudis;
 
-CREATE	TRIGGER	AnzahlStudis	BEFORE	INSERT	OR	UPDATE	OF	Studiengangsbezeichnung	OR	DELETE	ON	Student	FOR	EACH	ROW 
+CREATE	TRIGGER	AnzahlStudis	
+BEFORE	INSERT	OR	UPDATE	OF	Studiengangsbezeichnung	OR	
+DELETE	ON	Student	
+FOR	EACH	ROW 
 BEGIN 
   IF	:NEW.Studiengangsbezeichnung	IS	NOT	NULL THEN	UPDATE	Studiengang	SET	AnzahlStudis=AnzahlStudis+1	
-    WHERE	Studiengangsbezeichnung=:NEW.Studiengangsbezeichnung END IF;
+    WHERE	Studiengangsbezeichnung=:NEW.Studiengangsbezeichnung; 
+END IF;
   IF	:OLD.Studiengangsbezeichnung	IS	NOT	NULL THEN	UPDATE	Studiengang	SET	AnzahlStudis=AnzahlStudis-1	
-    WHERE	Studiengangsbezeichnung=:OLD.Studiengangsbezeichnung END	IF;
+    WHERE	Studiengangsbezeichnung=:OLD.Studiengangsbezeichnung;
+END	IF;
 END;
 
 INSERT INTO Student VALUES ('9876543','WI', 'BWI1', 'Sack', 'Fauler', '01.01.1970', 'Sackstadt');
@@ -111,10 +116,6 @@ VALUES(x, :new.Kostenstelle);
 END;
 /
 
-
-
-
-
 3.)
 select name from student 
 where Wohnort='Hamburg'
@@ -124,10 +125,3 @@ order by name ;
 1. Sortiere die Daten wie geforder
 2. Greife auf Tabelle zu
 3. Filtere die Daten wie gefordert: Verbinde Filter(UND/ODER)
-
-
-
-
-
-
-
